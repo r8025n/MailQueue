@@ -16,7 +16,9 @@ func StartConsumer() {
 	for msg := range msgs {
 		var email models.Email
 		if err := json.Unmarshal(msg.Body, &email); err != nil {
-			mail.Send(email)
+			log.Println("Error decoding message:", err)
+			continue
 		}
+		mail.Send(email)
 	}
 }
