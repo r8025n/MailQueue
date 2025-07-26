@@ -1,21 +1,26 @@
 package rabbitmq
 
 import (
+	"encoding/json"
+	"mailqueue/internal/models"
+
 	"github.com/streadway/amqp"
 )
 
-func Setup(url string) (*amqp.Connection, *amqp.Channel, error) {
-	conn, err := amqp.Dial(url)
+func Publish(queue string, msg models.Email) error {
+	body, err := json.Marshal(msg)
 	if err != nil {
-		return nil, nil, err
+		return err
 	}
 
-	ch, err := conn.Channel()
-	if err != nil {
-		return nil, nil, err
-	}
-
-	_, err = ch.QueueDeclare("emails", true, false, false, false, nil)
-
-	return conn, ch, nil
+	return channel.Publish(
+		"",
+		queue,
+		false,
+		false,
+		amqp.Publishing{
+			ContentType: "application/json",
+			Body:        body,
+		},
+	)
 }
