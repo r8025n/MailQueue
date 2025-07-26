@@ -17,6 +17,7 @@ func SetupRouter() http.Handler {
 
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", handlers.HealthCheck)
+		r.Post("/email", handlers.PublishHandler)
 	})
 
 	return r
