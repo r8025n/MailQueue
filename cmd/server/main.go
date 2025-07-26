@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"mailqueue/internal/rabbitmq"
 	"mailqueue/routes"
 
 	"github.com/joho/godotenv"
@@ -12,6 +13,9 @@ import (
 
 func main() {
 	_ = godotenv.Load()
+
+	rabbitmq.Setup(os.Getenv("RABBITMQ_URL"))
+	go rabbitmq.StartConsumer()
 
 	port := os.Getenv("PORT")
 	if port == "" {
