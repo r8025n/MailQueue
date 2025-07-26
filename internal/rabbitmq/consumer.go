@@ -5,12 +5,10 @@ import (
 	"log"
 	"mailqueue/internal/mail"
 	"mailqueue/internal/models"
-
-	"github.com/streadway/amqp"
 )
 
-func StartConsumer(ch amqp.Channel) {
-	msgs, err := ch.Consume("emails", "", true, false, false, false, nil)
+func StartConsumer() {
+	msgs, err := channel.Consume("emails", "", true, false, false, false, nil)
 	if err != nil {
 		log.Fatalf("Failed to register consumer: %v", err)
 	}
