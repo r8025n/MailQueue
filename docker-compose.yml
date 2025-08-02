@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # For app
+      - "15672:15672" # For management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  mailqueue:
+    build: .
+    container_name: mailqueue
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
