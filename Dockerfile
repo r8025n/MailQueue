@@ -15,4 +15,4 @@ WORKDIR /app
 COPY --from=builder /app/mailqueue .
 COPY .env .
 
-CMD ["./.mailqueue"]
+CMD ["./mailqueue"]
