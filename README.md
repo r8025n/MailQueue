@@ -51,7 +51,7 @@ A simple asynchronous email queue system built in Go using RabbitMQ for reliable
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/mailqueue.git
+   git clone https://github.com/r8025n/mailqueue.git
    cd mailqueue
    ```
 
